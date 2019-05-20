@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BDD7EE">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Witaj w Dzienniku Treningowym!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <Button
+        android:id="@+id/BazaCw"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:onClick="bazaCw"
+        android:background="@drawable/round_button"
+        android:text="Baza Ćwiczeń„" />
+
+    <Button
+        android:id="@+id/Zaloguj"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/BazaCw"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/round_button"
+        android:onClick="zaloguj"
+        android:text="Zaloguj" />
+
+    <Button
+        android:id="@+id/Rejestracja"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/Zaloguj"
+        android:layout_marginTop="100dp"
+        android:onClick="rejestracja"
+        android:background="@drawable/round_button"
+        android:text="Rejestracja" />
+
+
+</RelativeLayout>

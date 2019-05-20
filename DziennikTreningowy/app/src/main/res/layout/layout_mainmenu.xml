@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BDD7EE"
+ >
+
+    <Button
+        android:id="@+id/MojePlany"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="59dp"
+        android:background="@drawable/round_button"
+        android:onClick="plany"
+        android:text="Moje plany treningowe" />
+
+    <Button
+        android:id="@+id/BazaCw"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/round_button"
+        android:layout_below="@+id/MojePlany"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:onClick="bazaCw"
+        android:text="Baza Ä‡wiczeĹ„" />
+
+
+
+
+
+    <Button
+        android:id="@+id/Wiadomosci"
+        android:onClick="wiadomosci"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/round_button"
+        android:layout_below="@+id/BazaCw"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Wiadomosci" />
+
+
+
+    <Button
+        android:id="@+id/Wyloguj"
+        android:onClick="wyloguj"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/round_button"
+        android:layout_below="@+id/Wiadomosci"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Wyloguj" />
+</RelativeLayout>
