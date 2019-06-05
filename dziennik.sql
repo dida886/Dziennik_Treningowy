@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 20 Maj 2019, 23:52
+-- Czas generowania: 05 Cze 2019, 22:04
 -- Wersja serwera: 10.1.40-MariaDB
 -- Wersja PHP: 7.3.5
 
@@ -107,6 +107,60 @@ INSERT INTO `cwiczenie` (`id_cwiczenie`, `nazwa`, `link`, `partiaMiesni`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `cwiczeniewplanie`
+--
+
+CREATE TABLE `cwiczeniewplanie` (
+  `id_cwiczenie` int(11) DEFAULT NULL,
+  `id_trening` int(11) DEFAULT NULL,
+  `serie` int(11) DEFAULT NULL,
+  `powtorzenia` int(11) DEFAULT NULL,
+  `Czas` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `cwiczeniewplanie`
+--
+
+INSERT INTO `cwiczeniewplanie` (`id_cwiczenie`, `id_trening`, `serie`, `powtorzenia`, `Czas`) VALUES
+(16, 1, 4, 12, 0),
+(18, 1, 4, 18, 0),
+(14, 1, 3, 12, 0),
+(12, 1, 3, 10, 0),
+(21, 1, 4, 20, 0),
+(2, 2, 3, 11, 0),
+(17, 2, 3, 12, 0),
+(18, 2, 3, 13, 0),
+(7, 2, 3, 14, 0),
+(2, 2, 3, 12, 0),
+(3, 2, 3, 12, 0),
+(7, 2, 3, 12, 0),
+(8, 3, 3, 12, 0),
+(25, 3, 3, 12, 0),
+(24, 3, 3, 12, 0),
+(5, 3, 3, 8, 0),
+(2, 3, 3, 11, 0),
+(3, 3, 3, 12, 0),
+(2, 3, 3, 12, 0),
+(5, 3, 3, 12, 0),
+(4, 3, 3, 12, 0),
+(2, 3, 3, 19, 0),
+(7, 3, 3, 18, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `kategoria`
+--
+
+CREATE TABLE `kategoria` (
+  `id_kategoria` int(11) NOT NULL,
+  `nazwa` varchar(255) COLLATE utf8_polish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `konto`
 --
 
@@ -152,6 +206,74 @@ INSERT INTO `partiamiesni` (`id_partia`, `partiaMiesni`) VALUES
 (9, 'Łydki'),
 (10, 'Cardio');
 
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `plantreningowy`
+--
+
+CREATE TABLE `plantreningowy` (
+  `id_planTreningowy` int(11) NOT NULL,
+  `nazwa` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_polish_ci NOT NULL,
+  `autor` int(11) DEFAULT NULL,
+  `dlaKogo` int(11) DEFAULT NULL,
+  `publiczny` bit(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `plantreningowy`
+--
+
+INSERT INTO `plantreningowy` (`id_planTreningowy`, `nazwa`, `autor`, `dlaKogo`, `publiczny`) VALUES
+(1, 'plan 1', 1, 1, b'0');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `post`
+--
+
+CREATE TABLE `post` (
+  `temat` int(11) DEFAULT NULL,
+  `autor` int(11) DEFAULT NULL,
+  `nr_Post` int(11) NOT NULL,
+  `tresc` text COLLATE utf8_polish_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `temat`
+--
+
+CREATE TABLE `temat` (
+  `id_temat` int(11) NOT NULL,
+  `Kategoria` int(11) DEFAULT NULL,
+  `nazwa` varchar(255) COLLATE utf8_polish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `trening`
+--
+
+CREATE TABLE `trening` (
+  `id_trening` int(11) NOT NULL,
+  `id_planTreningowy` int(11) DEFAULT NULL,
+  `nazwa` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_polish_ci NOT NULL,
+  `uwagi` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_polish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `trening`
+--
+
+INSERT INTO `trening` (`id_trening`, `id_planTreningowy`, `nazwa`, `uwagi`) VALUES
+(1, 1, 'trening 1', 'dobry trening 1'),
+(2, 1, 'trening 2', 'dobry trening 2'),
+(3, 1, 'trening 3', 'dobry trening 3');
+
 --
 -- Indeksy dla zrzutów tabel
 --
@@ -162,6 +284,19 @@ INSERT INTO `partiamiesni` (`id_partia`, `partiaMiesni`) VALUES
 ALTER TABLE `cwiczenie`
   ADD PRIMARY KEY (`id_cwiczenie`),
   ADD KEY `partiaMiesni` (`partiaMiesni`);
+
+--
+-- Indeksy dla tabeli `cwiczeniewplanie`
+--
+ALTER TABLE `cwiczeniewplanie`
+  ADD KEY `id_cwiczenie` (`id_cwiczenie`),
+  ADD KEY `id_trening` (`id_trening`);
+
+--
+-- Indeksy dla tabeli `kategoria`
+--
+ALTER TABLE `kategoria`
+  ADD PRIMARY KEY (`id_kategoria`);
 
 --
 -- Indeksy dla tabeli `konto`
@@ -178,6 +313,35 @@ ALTER TABLE `partiamiesni`
   ADD PRIMARY KEY (`id_partia`);
 
 --
+-- Indeksy dla tabeli `plantreningowy`
+--
+ALTER TABLE `plantreningowy`
+  ADD PRIMARY KEY (`id_planTreningowy`),
+  ADD KEY `autor` (`autor`),
+  ADD KEY `dlaKogo` (`dlaKogo`);
+
+--
+-- Indeksy dla tabeli `post`
+--
+ALTER TABLE `post`
+  ADD KEY `temat` (`temat`),
+  ADD KEY `autor` (`autor`);
+
+--
+-- Indeksy dla tabeli `temat`
+--
+ALTER TABLE `temat`
+  ADD PRIMARY KEY (`id_temat`),
+  ADD KEY `Kategoria` (`Kategoria`);
+
+--
+-- Indeksy dla tabeli `trening`
+--
+ALTER TABLE `trening`
+  ADD PRIMARY KEY (`id_trening`),
+  ADD KEY `id_planTreningowy` (`id_planTreningowy`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -186,6 +350,12 @@ ALTER TABLE `partiamiesni`
 --
 ALTER TABLE `cwiczenie`
   MODIFY `id_cwiczenie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT dla tabeli `kategoria`
+--
+ALTER TABLE `kategoria`
+  MODIFY `id_kategoria` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT dla tabeli `konto`
@@ -200,6 +370,24 @@ ALTER TABLE `partiamiesni`
   MODIFY `id_partia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT dla tabeli `plantreningowy`
+--
+ALTER TABLE `plantreningowy`
+  MODIFY `id_planTreningowy` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT dla tabeli `temat`
+--
+ALTER TABLE `temat`
+  MODIFY `id_temat` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `trening`
+--
+ALTER TABLE `trening`
+  MODIFY `id_trening` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- Ograniczenia dla zrzutów tabel
 --
 
@@ -208,6 +396,39 @@ ALTER TABLE `partiamiesni`
 --
 ALTER TABLE `cwiczenie`
   ADD CONSTRAINT `cwiczenie_ibfk_1` FOREIGN KEY (`partiaMiesni`) REFERENCES `partiamiesni` (`id_partia`);
+
+--
+-- Ograniczenia dla tabeli `cwiczeniewplanie`
+--
+ALTER TABLE `cwiczeniewplanie`
+  ADD CONSTRAINT `cwiczeniewplanie_ibfk_1` FOREIGN KEY (`id_cwiczenie`) REFERENCES `cwiczenie` (`id_cwiczenie`),
+  ADD CONSTRAINT `cwiczeniewplanie_ibfk_2` FOREIGN KEY (`id_trening`) REFERENCES `trening` (`id_trening`);
+
+--
+-- Ograniczenia dla tabeli `plantreningowy`
+--
+ALTER TABLE `plantreningowy`
+  ADD CONSTRAINT `plantreningowy_ibfk_1` FOREIGN KEY (`autor`) REFERENCES `konto` (`id_konto`),
+  ADD CONSTRAINT `plantreningowy_ibfk_2` FOREIGN KEY (`dlaKogo`) REFERENCES `konto` (`id_konto`);
+
+--
+-- Ograniczenia dla tabeli `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`temat`) REFERENCES `temat` (`id_temat`),
+  ADD CONSTRAINT `post_ibfk_2` FOREIGN KEY (`autor`) REFERENCES `konto` (`id_konto`);
+
+--
+-- Ograniczenia dla tabeli `temat`
+--
+ALTER TABLE `temat`
+  ADD CONSTRAINT `temat_ibfk_1` FOREIGN KEY (`Kategoria`) REFERENCES `kategoria` (`id_kategoria`);
+
+--
+-- Ograniczenia dla tabeli `trening`
+--
+ALTER TABLE `trening`
+  ADD CONSTRAINT `trening_ibfk_1` FOREIGN KEY (`id_planTreningowy`) REFERENCES `plantreningowy` (`id_planTreningowy`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
